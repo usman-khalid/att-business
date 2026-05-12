@@ -181,8 +181,8 @@ async function loadTemplate(main, template) {
         await mod.default(main);
       }
     }
-  } catch {
-    // template JS/CSS not found — skip silently
+  } catch (error) {
+    console.error('template loading failed', error);
   }
 }
 
