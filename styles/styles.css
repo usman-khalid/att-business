@@ -578,7 +578,8 @@ main > .section:has(.social-share) {
   contain: none;
 }
 
-:is(main, article.article-body) > .section > div {
+main > .section > div,
+article.article-body > .section > div {
   max-width: var(--grid-container-width);
   margin: auto;
   padding: 0 var(--content-padding-inline);
