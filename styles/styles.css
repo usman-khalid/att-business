@@ -567,7 +567,7 @@ main img:not([width], [height]) {
 }
 
 /* sections – boilerplate structure with design tokens */
-main > .section {
+:is(main, article.article-body) > .section {
   margin: inherit;
   padding-block: var(--space-xl);
 }
@@ -585,7 +585,8 @@ main > .section:has(.social-share) {
   contain: none;
 }
 
-main > .section > div {
+main > .section > div,
+article.article-body > .section > div {
   max-width: var(--grid-container-width);
   margin: auto;
   padding: 0 var(--content-padding-inline);
@@ -600,11 +601,11 @@ main .section.highlight {
 }
 
 /* section-metadata style=divider: content-width (grid) border-bottom */
-main > .section.divider {
+:is(main, article.article-body) > .section.divider {
   position: relative;
 }
 
-main > .section.divider::after {
+:is(main, article.article-body) > .section.divider::after {
   content: '';
   display: block;
   max-width: var(--grid-container-width);
@@ -613,7 +614,7 @@ main > .section.divider::after {
   border-bottom: 1px solid var(--color-gray-200);
 }
 
-main > .section.divider.center {
+:is(main, article.article-body) > .section.divider.center {
     text-align: center;
 }
 
@@ -643,27 +644,27 @@ main > .section.rust a:any-link {
 }
 
 /* section-metadata style=gradient: warm brand gradient full-bleed section */
-main > .section.gradient {
+:is(main, article.article-body) > .section.gradient {
   background: var(--gradient-brand);
   color: var(--color-parchment);
   margin: 0;
   padding: var(--space-3xl, var(--section-block-space)) 0;
 }
 
-main > .section.gradient * {
+:is(main, article.article-body) > .section.gradient * {
   color: var(--color-parchment);
 }
 
-main > .section.gradient a:any-link {
+:is(main, article.article-body) > .section.gradient a:any-link {
   color: var(--color-parchment);
   text-decoration-color: rgb(255 255 255 / 40%);
 }
 
 /* Shared button overrides for colored sections (rust, gradient) */
-main > .section.rust a.button:any-link,
-main > .section.rust button.button,
-main > .section.gradient a.button:any-link,
-main > .section.gradient button.button {
+:is(main, article.article-body) > .section.rust a.button:any-link,
+:is(main, article.article-body) > .section.rust button.button,
+:is(main, article.article-body) > .section.gradient a.button:any-link,
+:is(main, article.article-body) > .section.gradient button.button {
   border-color: var(--color-parchment);
   background-color: transparent;
   background-image: none;
@@ -671,10 +672,10 @@ main > .section.gradient button.button {
   box-shadow: none;
 }
 
-main > .section.rust a.button:any-link:hover,
-main > .section.rust button.button:hover,
-main > .section.gradient a.button:any-link:hover,
-main > .section.gradient button.button:hover {
+:is(main, article.article-body) > .section.rust a.button:any-link:hover,
+:is(main, article.article-body) > .section.rust button.button:hover,
+:is(main, article.article-body) > .section.gradient a.button:any-link:hover,
+:is(main, article.article-body) > .section.gradient button.button:hover {
   background-color: var(--color-parchment);
   border-color: var(--color-parchment);
   color: var(--color-rust);
@@ -682,14 +683,14 @@ main > .section.gradient button.button:hover {
 }
 
 /* section-metadata style=ink: deep dark full-bleed section */
-main > .section.ink {
+:is(main, article.article-body) > .section.ink {
   background-color: var(--color-ink);
   color: var(--color-parchment);
   margin: 0;
   padding: var(--space-3xl, var(--section-block-space)) 0;
 }
 
-main > .section.ink * {
+:is(main, article.article-body) > .section.ink * {
   color: var(--color-parchment);
 }
 

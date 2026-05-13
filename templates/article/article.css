@@ -94,3 +94,13 @@
   letter-spacing: 0;
   color: light-dark(var(--color-ink), var(--color-parchment));
 }
+
+/* ==========================================================================
+   Prose reading width — constrain default-content-wrapper to a comfortable
+   line length (~72 characters) for long-form article text.
+   ========================================================================== */
+
+.article .article-body .default-content-wrapper {
+  max-width: 720px;
+  margin-inline: auto;
+}
