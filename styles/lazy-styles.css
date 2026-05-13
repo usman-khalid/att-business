@@ -60,7 +60,7 @@ a:any-link {
   Blockquote and horizontal rule – editorial polish
   ========================================================================== */
 
-main blockquote {
+:is(main, article.article-body) blockquote {
   margin: var(--space-2xl, 48px) 0;
   padding: var(--space-l) var(--space-xl);
   border-left: 4px solid var(--color-gold);
@@ -73,11 +73,11 @@ main blockquote {
   color: light-dark(var(--color-ink), var(--color-parchment));
 }
 
-main blockquote p {
+:is(main, article.article-body) blockquote p {
   margin: 0;
 }
 
-main hr {
+:is(main, article.article-body) hr {
   border: none;
   height: 1px;
   margin: var(--space-2xl, 48px) auto;
@@ -110,7 +110,7 @@ main hr {
 }
 
 /* H2 accent — thin brand-gradient bar beneath h2 in plain content sections */
-main > .section:not(.hero-container, .gradient, .ink, .rust) h2::after {
+:is(main, article.article-body) > .section:not(.hero-container, .gradient, .ink, .rust) h2::after {
   content: '';
   display: block;
   width: 2.5rem;
@@ -120,7 +120,7 @@ main > .section:not(.hero-container, .gradient, .ink, .rust) h2::after {
   border-radius: 1px;
 }
 
-main > .section.center:not(.hero-container, .gradient, .ink, .rust) h2::after {
+:is(main, article.article-body) > .section.center:not(.hero-container, .gradient, .ink, .rust) h2::after {
   margin-inline: auto;
 }
 
@@ -150,12 +150,12 @@ header .nav-wrapper.scrolled {
   Global image hover – subtle scale on linked images
   ========================================================================== */
 
-main a picture img {
+:is(main, article.article-body) a picture img {
   transition: transform 0.55s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1)),
     filter 0.55s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
 }
 
-main a:hover picture img {
+:is(main, article.article-body) a:hover picture img {
   transform: scale(1.04);
   filter: brightness(1.04);
 }
@@ -166,7 +166,7 @@ main a:hover picture img {
 }
 
 /* Focus-visible on all interactive elements: consistent brand ring */
-main :is(a, button, input, select, textarea, [tabindex]):focus-visible {
+:is(main, article.article-body) :is(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 3px;
   border-radius: 2px;
