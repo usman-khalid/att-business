@@ -219,8 +219,7 @@ async function loadLazy(doc) {
   const headerEl = doc.querySelector('header');
   const footerEl = doc.querySelector('footer');
   loadHeader(headerEl);
-  const templateName = getMetadata('template')
-    || toClassName(window.location.pathname.split('/').filter(Boolean)[0] || '');
+  const templateName = getMetadata('template');
   if (templateName) {
     document.body.classList.add(templateName);
     await loadTemplate(doc, templateName);
