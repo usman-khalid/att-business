@@ -78,7 +78,7 @@
 }
 
 /* Hide the second image row when hero block decoration hasn't run (Target offer injection) */
-.hero > div:nth-child(2):not(.hero-img-dark, .hero-img-light) {
+.hero > div:nth-child(2):not(.hero-img-dark, .hero-img-light, .hero-text) {
   display: none;
 }
 
