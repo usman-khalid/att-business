@@ -116,8 +116,8 @@
   --color-shaded: light-dark(var(--color-gray-100), var(--color-card-dark));
 
   /* fonts */
-  --font-family: montserrat, "Trebuchet MS", sans-serif;
-  --font-family-serif: montserrat, "Trebuchet MS", sans-serif;
+  --font-family: att-aleck-sans, montserrat, "Trebuchet MS", sans-serif;
+  --font-family-serif: att-aleck-sans, montserrat, "Trebuchet MS", sans-serif;
   --font-family-mono: "JetBrains Mono", "Courier New", monospace;
   --body-font-family: var(--font-family);
   --heading-font-family: var(--font-family);
