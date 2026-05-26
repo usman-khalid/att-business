@@ -1,8 +1,8 @@
 Demo Project - Cloud Adoption
 
 ## Environments
-- Preview: https://main--demo--scdemos.aem.page/
-- Live: https://main--demo--scdemos.aem.live/
+- Preview: https://main--att-business--usman-khalid.aem.page/
+- Live: https://main--att-business--usman-khalid.aem.live/
 
 ## Documentation
 
