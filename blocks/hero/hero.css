@@ -7,7 +7,8 @@
 
 .hero {
   position: relative;
-  background-color: light-dark(var(--color-parchment), var(--color-obsidian));
+  background-color: var(--color-rust); /* #00388f – ATT dark blue fallback */
+  min-height: 380px;
 }
 
 /* Image */
@@ -21,19 +22,19 @@
   line-height: 0;
 }
 
-/* Gradient fade effect at the bottom of the hero image */
+/*
+ * Mobile gradient: dark overlay so white text is readable over the hero image.
+ * The ATT mobile hero images are full-bleed product photos with no built-in
+ * dark zone, so we need a semitransparent tint.
+ */
 .hero > div:first-child::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 65%;
-  background: linear-gradient(to bottom, transparent 0%, light-dark(var(--color-parchment), var(--color-obsidian)) 100%);
+  inset: 0;
+  background: linear-gradient(to bottom, rgb(0 56 143 / 35%) 0%, rgb(0 28 71 / 78%) 75%);
   pointer-events: none;
   z-index: 1;
 }
-
 
 /* Dual-image hero: light shown by default, dark hidden */
 .hero .hero-img-dark {
@@ -54,9 +55,9 @@
 .hero picture img {
   display: block;
   width: 100%;
-  max-height: 580px;
+  max-height: 640px;
   object-fit: cover;
-  opacity: 0.55;
+  object-position: center right;
 }
 
 /* Text overlay */
@@ -66,7 +67,7 @@
   z-index: 2;
   padding: 40px var(--content-padding-inline);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .hero > div:last-child > div {
@@ -74,7 +75,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-m);
-  max-width: 600px;
+  max-width: 560px;
+  padding-bottom: var(--space-l);
 }
 
 /* Hide the second image row when hero block decoration hasn't run */
@@ -123,14 +125,13 @@
   margin: 0;
 }
 
-/* Heading */
+/* Heading – always white; ATT heroes are dark blue */
 .hero h1 {
   margin: 0;
-  font-family: var(--heading-font-family);
-  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-size: clamp(2rem, 8vw, 4rem);
   font-weight: 700;
   line-height: 1.08;
-  color: light-dark(var(--color-ink), var(--color-parchment));
+  color: var(--color-parchment);
 }
 
 .hero h1 em {
@@ -139,19 +140,13 @@
   color: var(--color-gold);
 }
 
-.dark-scheme .hero h1 em,
-:root[data-theme='dark'] .hero h1 em {
-  color: var(--color-gold);
-}
-
-/* Body text — hidden on mobile */
+/* Body text */
 .hero p:not(.button-container, .hero-tagline) {
   display: none;
   max-width: 550px;
   margin: 0;
-  font-family: var(--font-family);
-  font-size: 1.1rem;
-  color: light-dark(var(--color-gray-700), var(--color-muted));
+  font-size: 1.05rem;
+  color: rgb(255 255 255 / 85%);
   line-height: 1.6;
   letter-spacing: 0.01em;
 }
@@ -160,7 +155,7 @@
   margin-top: var(--space-s);
 }
 
-/* Icon */
+/* Icon (logo) */
 .hero .icon {
   flex-shrink: 0;
   width: 165px;
@@ -171,42 +166,49 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-/* Dark-mode image: blend into dark bg */
-.dark-scheme .hero .hero-img-dark picture img,
-:root[data-theme='dark'] .hero .hero-img-dark picture img {
-  opacity: 0.3;
-  mask-image: radial-gradient(ellipse 85% 70% at 50% 35%, black 25%, transparent 100%);
-}
-
-/* Dark mode fade uses obsidian */
-.dark-scheme .hero > div:first-child::after,
-:root[data-theme='dark'] .hero > div:first-child::after {
-  background: linear-gradient(to bottom, transparent 0%, var(--color-obsidian) 100%);
+  filter: brightness(0) invert(1); /* Force white logo on dark background */
 }
 
 /* Tablet: show body text */
 @media (width >= 600px) {
   .hero p:not(.button-container, .hero-tagline) {
     display: block;
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 }
 
-/* Desktop */
+/*
+ * Desktop: switch to vertical-center alignment, left-side text.
+ * ATT desktop hero images are split-panel: dark navy LEFT (text zone),
+ * product/lifestyle imagery RIGHT. Overlay gradient fades left-to-right.
+ */
 @media (width >= 900px) {
+  .hero {
+    min-height: 500px;
+  }
+
+  .hero picture img {
+    max-height: 700px;
+  }
+
+  /* Left-to-right gradient: dark left for text, transparent right for product image */
+  .hero > div:first-child::after {
+    background: linear-gradient(to right, rgb(0 28 71 / 80%) 0%, rgb(0 28 71 / 45%) 35%, rgb(0 28 71 / 10%) 60%, transparent 80%);
+  }
+
   .hero > div:last-child {
-    padding: 100px 5vw;
+    padding: 80px 5vw;
+    align-items: center;
   }
 
   .hero > div:last-child > div {
-    max-width: 1000px;
-    margin: 0 25%;
+    max-width: 520px;
+    margin: 0; /* Left-aligned – text lives in the dark left panel */
+    padding-bottom: 0;
   }
 
   .hero h1 {
-    font-size: clamp(3.5rem, 5vw, 6rem);
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
   }
 }
 
@@ -216,7 +218,7 @@
   }
 
   .hero h1 {
-    font-size: clamp(4rem, 5.5vw, 6.5rem);
+    font-size: clamp(3rem, 4vw, 5rem);
   }
 }
 
@@ -231,6 +233,7 @@
   text-align: center;
   max-width: var(--grid-container-width);
   margin: 0 auto;
+  padding-bottom: 0;
 }
 
 .hero.no-image p:not(.button-container, .hero-tagline) {

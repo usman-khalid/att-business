@@ -190,7 +190,7 @@ header .nav-brand {
   font-weight: var(--nav-brand-weight);
   line-height: 1;
   letter-spacing: -0.5px;
-  color: light-dark(var(--color-rust), var(--color-rust-bright));
+  color: light-dark(var(--color-ink), var(--color-parchment));
 }
 
 header nav .nav-brand a:any-link {
@@ -210,7 +210,7 @@ header nav .nav-brand .icon.icon-logo {
   }
 
 header nav .nav-brand :is(img, svg) {
-  width: min(200px, 42vw);
+  width: min(160px, 42vw);
   height: 45px;
   object-fit: contain;
 }
