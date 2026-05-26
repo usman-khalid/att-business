@@ -619,7 +619,7 @@ header nav .nav-tools .nav-search-input {
   background-color: transparent;
   color: inherit;
   font: inherit;
-  font-size: var(--body-font-size-s);
+  font-size: var(--body-font-size-xs);
   line-height: 1.2;
   transition: border-color 0.18s ease, box-shadow 0.18s ease;
 }

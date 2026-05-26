@@ -1,7 +1,7 @@
 footer {
   width: 100%;
-  background-color: light-dark(var(--color-rust), var(--color-obsidian));
-  color: var(--color-parchment);
+  background-color: var(--color-gray-100);
+  color: var(--text-color);
   border-top: 1px solid light-dark(transparent, rgb(0 159 219 / 15%));
   font-size: var(--body-font-size-xs);
 }

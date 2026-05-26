@@ -1,0 +1,357 @@
+/* ==========================================================================
+   media-list block
+   Mobile: horizontal scroll-snap row of self-contained cards (image at top,
+   icon + title + description + arrow on a soft blue plate beneath).
+   Desktop: two-column layout — a sticky media panel on the left whose picture
+   swaps as you hover an item on the right.
+   ========================================================================== */
+
+   .media-list {
+    --media-list-plate-bg: light-dark(
+      color-mix(in srgb, var(--color-rust, #00568d) 6%, var(--color-parchment, #fff)),
+      color-mix(in srgb, var(--color-rust-bright, #4aa6ff) 10%, transparent)
+    );
+    --media-list-icon-bg: light-dark(var(--color-parchment, #fff), var(--color-gray-800, #1f1f1f));
+    --media-list-card-radius: 16px;
+  
+    max-width: var(--grid-container-width, 1200px);
+    margin-inline: auto;
+    padding-inline: var(--content-padding-inline, 24px);
+    margin-top: var(--space-l);
+  }
+  
+  /* --------------------------------------------------------------------------
+     Desktop media panel — only visible at ≥900px (see media query at bottom).
+     Hidden by default so mobile doesn't render the swap target at all.
+     -------------------------------------------------------------------------- */
+  
+  .media-list .media-list-media {
+    display: none;
+  }
+  
+  .media-list .media-list-media-item {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  
+  .media-list .media-list-media-item.is-active {
+    opacity: 1;
+  }
+  
+  .media-list .media-list-media-item picture,
+  .media-list .media-list-media-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* --------------------------------------------------------------------------
+     Items list
+     Mobile: horizontal scroll-snap row that bleeds to the viewport edges so
+     the next card peeks in from the right.
+     -------------------------------------------------------------------------- */
+  
+  .media-list .media-list-items {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-m, 16px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--content-padding-inline, 24px);
+  
+    /* Bleed past the block's inline padding so cards align to viewport edges. */
+    margin-inline: calc(-1 * var(--content-padding-inline, 24px));
+    padding-inline: var(--content-padding-inline, 24px);
+    padding-block: var(--space-s, 12px);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .media-list .media-list-items::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .media-list .media-list-item {
+    margin: 0;
+    flex: 0 0 auto;
+    width: min(85vw, 360px);
+    scroll-snap-align: start;
+  }
+  
+  /* --------------------------------------------------------------------------
+     Item — mobile card layout
+     Image fills the top of the card; below it a soft-blue plate holds the
+     icon (in a white circle that overlaps the image edge), title, description,
+     and a solid blue arrow disc in the bottom-right corner.
+     -------------------------------------------------------------------------- */
+  
+  .media-list .media-list-item-inner {
+    display: block;
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    -webkit-text-fill-color: currentcolor;
+    border-radius: var(--media-list-card-radius);
+    overflow: hidden;
+    background: var(--media-list-plate-bg);
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .media-list a.media-list-item-inner:focus-visible {
+    outline: 2px solid var(--color-rust, #00568d);
+    outline-offset: 2px;
+  }
+  
+  .media-list .media-list-item-media {
+    display: block;
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    background: var(--media-list-plate-bg);
+  }
+  
+  .media-list .media-list-item-media picture,
+  .media-list .media-list-item-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Icon — sits at the top of the plate, half-overlapping the image edge. */
+  .media-list .media-list-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--media-list-icon-bg);
+    color: var(--color-rust, #00568d);
+    margin: -24px 0 0 var(--space-m, 20px);
+    box-shadow: 0 2px 12px rgb(0 0 0 / 8%);
+    position: relative;
+    z-index: 1;
+  }
+
+  .media-list .media-list-item.is-active .media-list-icon {
+    background: var(--color-parchment);
+  }
+  
+  .media-list .media-list-icon .icon,
+  .media-list .media-list-icon span.icon {
+    display: inline-flex;
+    width: 26px;
+    height: 26px;
+  }
+  
+  .media-list .media-list-icon img,
+  .media-list .media-list-icon svg {
+    width: 100%;
+    height: 100%;
+    color: inherit;
+  }
+  
+  /* Body: heading + description. Leave room on the right for the arrow disc. */
+  .media-list .media-list-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--space-m, 18px) calc(var(--space-xl, 60px) + var(--space-s, 12px)) var(--space-l, 28px) var(--space-m, 20px);
+    min-width: 0;
+  }
+  
+  .media-list .media-list-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: light-dark(var(--color-ink, #111), var(--color-parchment, #fff));
+    letter-spacing: normal;
+  }
+  
+  .media-list .media-list-body p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: light-dark(var(--color-gray-700, #555), var(--color-gray-300, #c4c4c4));
+  }
+  
+  /* Arrow disc — filled blue circle, bottom-right, with a white chevron. */
+  .media-list .media-list-arrow {
+    position: absolute;
+    bottom: var(--space-m, 16px);
+    right: var(--space-m, 16px);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-rust, #00568d);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+  
+  /* White chevron rendered with borders for crisp scaling. */
+  .media-list .media-list-arrow::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--color-parchment, #fff);
+    border-top: 2px solid var(--color-parchment, #fff);
+    transform: rotate(45deg) translate(-1px, 1px);
+  }
+  
+  .media-list a.media-list-item-inner:hover .media-list-arrow,
+  .media-list a.media-list-item-inner:focus-visible .media-list-arrow {
+    background-color: var(--color-rust-bright, #4aa6ff);
+    transform: translateX(3px);
+  }
+  
+  /* --------------------------------------------------------------------------
+     Desktop (≥900px): switch to the two-column layout.
+     Items become a vertical list paired with a sticky media panel.
+     -------------------------------------------------------------------------- */
+  
+  @media (width >= 900px) {
+    .media-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: var(--space-xl, 60px);
+      align-items: start;
+    }
+  
+    .media-list .media-list-media {
+      display: block;
+      position: sticky;
+      top: var(--space-l, 32px);
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: var(--border-radius-heritage, 12px);
+      background: light-dark(var(--color-gray-100, #f4f4f4), var(--color-gray-800, #1f1f1f));
+    }
+  
+    /* Items: vertical, no scroll, no plate background. */
+    .media-list .media-list-items {
+      flex-direction: column;
+      gap: 0;
+      overflow: visible;
+      scroll-snap-type: none;
+      margin-inline: 0;
+      padding-inline: 0;
+      padding-block: 0;
+    }
+  
+    .media-list .media-list-item {
+      width: auto;
+      border-top: 1px solid light-dark(var(--color-gray-200, #e5e5e5), var(--color-gray-700, #2f2f2f));
+    }
+  
+    .media-list .media-list-item:first-child {
+      border-top: 0;
+    }
+  
+    /* Item inner: horizontal flex row (icon | body | arrow), no plate, no card. */
+    .media-list .media-list-item-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--space-l, 24px);
+      padding: var(--space-l, 28px) var(--space-m, 20px);
+      border-radius: var(--border-radius-heritage, 8px);
+      background: transparent;
+      height: auto;
+      overflow: visible;
+      transition: background-color 0.18s ease;
+    }
+  
+    .media-list a.media-list-item-inner:hover,
+    .media-list .media-list-item.is-active .media-list-item-inner {
+      background-color: var(--color-surface);
+    }
+
+    /* Hide the inline image — the sticky media panel does the heavy lifting. */
+    .media-list .media-list-item-media {
+      display: none;
+    }
+
+    /* Icon back to the soft blue tinted circle on the left. */
+    .media-list .media-list-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0;
+      box-shadow: none;
+      background: var(--color-surface);
+    }
+
+    .media-list a.media-list-item-inner:hover .media-list-icon {
+      background: var(--color-parchment);
+    }
+  
+    .media-list .media-list-icon .icon,
+    .media-list .media-list-icon span.icon {
+      width: 64px;
+      height: 64px;
+    }
+  
+    .media-list .media-list-body {
+      padding: 0;
+      gap: 4px;
+    }
+  
+    .media-list .media-list-title {
+      font-size: 1.25rem;
+    }
+  
+    .media-list .media-list-body p {
+      font-size: 1rem;
+    }
+  
+    /* Replace the bottom-right disc arrow with a simple chevron on the right. */
+    .media-list .media-list-arrow {
+      position: static;
+      width: 12px;
+      height: 12px;
+      border-radius: 0;
+      background: transparent;
+      border-right: 2px solid var(--color-rust, #00568d);
+      border-top: 2px solid var(--color-rust, #00568d);
+      transform: rotate(45deg);
+      margin-right: var(--space-xs, 8px);
+    }
+  
+    .media-list .media-list-arrow::before {
+      content: none;
+    }
+  
+    .media-list .media-list-item.is-active .media-list-arrow,
+    .media-list a.media-list-item-inner:hover .media-list-arrow {
+      transform: rotate(45deg) translate(2px, -2px);
+      background: transparent;
+    }
+  }
+  
+  /* --------------------------------------------------------------------------
+     Larger desktop tweaks
+     -------------------------------------------------------------------------- */
+  
+  @media (width >= 1200px) {
+    .media-list {
+      gap: 80px;
+    }
+  
+    .media-list .media-list-title {
+      font-size: 1.35rem;
+    }
+  }
+  

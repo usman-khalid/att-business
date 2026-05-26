@@ -1,10 +1,11 @@
 /* Contact-style form layout (inspired by contact-us pattern) */
 main .form-container {
-  max-width: min(var(--grid-container-width), 860px);
+  max-width: 90%;
   width: 100%;
-  margin: 0 auto;
   padding: var(--space-l) var(--content-padding-inline);
   box-sizing: border-box;
+  margin: 0 auto !important;
+  border-radius: 10px;
 }
 
 main .form-container .form-wrapper {
@@ -50,7 +51,6 @@ main .form form {
   background: light-dark(var(--color-light), rgb(6 13 13 / 60%));
   color: inherit;
   font-size: var(--body-font-size-s);
-  transition: border-color 0.25s, box-shadow 0.25s;
 }
 
 .form textarea {
@@ -180,7 +180,6 @@ main .form form {
   border: 1px solid currentcolor;
   background: currentcolor;
   opacity: 0.4;
-  transition: opacity 0.2s;
   cursor: pointer;
 }
 
@@ -194,7 +193,6 @@ main .form form {
   height: 1em;
   border-radius: 50%;
   background: inherit;
-  transition: left 0.2s;
 }
 
 .form .form-field.toggle-field label input:checked + span {
@@ -238,12 +236,10 @@ main .form form {
   padding: 12px 24px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  border: 0;
 }
 
 .form .button-wrapper button.button:not(.secondary) {
-  border: 1px solid light-dark(var(--color-rust), var(--color-rust-bright));
-  background: light-dark(var(--color-rust), var(--color-rust-bright));
   color: var(--color-parchment);
 }
 
@@ -254,10 +250,7 @@ main .form form {
 }
 
 .form .button-wrapper button.button:not(.secondary):hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px light-dark(rgb(0 56 143 / 25%), rgb(0 159 219 / 25%));
+  border: 0;
 }
 
 .form .button-wrapper button.button.secondary {
@@ -269,5 +262,6 @@ main .form form {
 .form .button-wrapper button.button.secondary:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
-  transform: translateY(-2px);
+  transform: none;
+  box-shadow: none;
 }
